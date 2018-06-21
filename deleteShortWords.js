@@ -1,10 +1,8 @@
-let str = 'asdfgh asd asdfgd asdg';
+const str = 'asdfgh asd asdfgd';
 
 function deleteWords(checkStr) {
-
-    let strSplit = checkStr.split(' ');
-
-    for (let i in strSplit) {
+    const strSplit = checkStr.split(' ');
+    for (const i in strSplit) {
         if(strSplit[i].length < 5) {
             strSplit[i] = '';
         }
@@ -12,5 +10,4 @@ function deleteWords(checkStr) {
 
     return strSplit.join(' ');
 }
-
 console.log(deleteWords(str));

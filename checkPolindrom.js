@@ -1,14 +1,12 @@
-var stringPol = 'lol';
+const stringPol = 'lolec';
 
 function polindrom(str) {
-    let strReverse = str.split('').reverse().join('');
-
-    if (strReverse == str) {
+    const strReverse = str.split('').reverse().join('');
+    if (strReverse === str) {
         return 'polindrom';
-    } else {
-        return 'ne polindrom';
     }
 
+    return 'ne polindrom';
 }
 
 console.log(polindrom(stringPol));
