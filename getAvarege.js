@@ -1,12 +1,12 @@
-let arr = [1, 2, 3, 4, 5, 6];
+const arr = [1, 2, 3, 4, 5, 6];
 
-function getAvarage(array) {
-    let avarage = 0;
+function getAverage(array) {
+    let average = 0;
     for (let i = 0; i < array.length; i++){
-        avarage += array[i]/array.length
+        average += array[i]/array.length;
     }
-    let result = array.filter((item) => { return (avarage < item) });
-    return result
+    const result = array.filter((item) => { return (average < item) });
 
+    return result;
 }
-console.log(getAvarage(arr))
+console.log(getAverage(arr));

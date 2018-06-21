@@ -1,5 +1,5 @@
-
 const array = [1, 0, 0, 1, 1, 1];
+
 function maxValueInRow(arr) {
     const maxValue = 1;
     let counter = 0;
@@ -7,12 +7,14 @@ function maxValueInRow(arr) {
     arr.forEach((value, index) => {
         if (value === maxValue) {
             counter += 1;
-            endIndex = index
+            endIndex = index;
+
             return;
         }
         counter = 0;
-    })
-    let startIndex = (endIndex + 1) - counter;
-    return [counter,startIndex, endIndex]
+    });
+    const startIndex = (endIndex + 1) - counter;
+
+    return [counter,startIndex, endIndex];
 }
-console.log(maxValueInRow(array))
+console.log(maxValueInRow(array));
