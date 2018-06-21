@@ -11,7 +11,7 @@ function fibLoop(z) {
 console.log(fibLoop(7));
 
 function fibRecursion(n) {
-    return (n <= 5) ? n : n = fibRecursion(n - 1) + fibRecursion(n - 2);
+    return (n <= 1) ? n : n = fibRecursion(n - 1) + fibRecursion(n - 2);
 }
 console.log(fibRecursion(5));
 
