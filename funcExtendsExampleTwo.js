@@ -8,21 +8,21 @@ function TV() {
         name: '2 + 2'
     };
 }
+
 function SmartTV() {
     TV.apply(this, arguments);
     const control = new Controller();
 
     this.channelControll = () => {
-        return (control.stateControll() === 'full hd') ? this.channelFullHD : this.channelHD
+        return (control.stateControll() === 'full hd') ? this.channelFullHD : this.channelHD;
     }
-
 }
-
 
 function Controller(state) {
     this.state = false;
     const defaulQuality = 'hd';
     const goodQuality = 'full hd';
+
     this.stateControll = () => {
         return (state === 'on') ? goodQuality : defaulQuality;
     }

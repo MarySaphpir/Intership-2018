@@ -11,8 +11,6 @@ Validator.prototype.isUser = function () {
 Validator.prototype.getTypeOfSigner = function () {
     return (!this.isAdmin()) ? this.isUser() : this.isAdmin();
 };
-let validate = new Validator('admin');
-console.log(validate.getTypeOfSigner());
 
 function Admin(name, pass) {
     Validator.apply(this, arguments);
@@ -26,5 +24,6 @@ Admin.prototype.isAdmin = function () {
     let result = Validator.prototype.isAdmin.call(this);
     return (this.name === 'admin' && this.pass === '12345') ? result : Admin.prototype.isUser();
 };
+
 let admin = new Admin('admin', '12345');
 console.log(admin.getTypeOfSigner());
