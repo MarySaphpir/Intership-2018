@@ -15,7 +15,6 @@ function getAllValues(obj) {
         let value = obj[key];
         if(typeof value === 'object') {
             getAllValues(value);
-
         }else {
             console.log(value);
         }
