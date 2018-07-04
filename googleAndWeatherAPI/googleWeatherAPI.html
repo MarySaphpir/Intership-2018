@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY7IUQO7WerI1btBbxifhyJV97kvSMgXs&callback=initMap"
+            async defer></script>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    let map;
+    let infoWindow;
+    let examplePosition = {
+        lat: 50.434341,
+        lng: 30.527756
+    };
+    const weatherApiUrl = 'http://api.openweathermap.org/data/2.5/weather?';
+    const weatherAPIkey = '7aee3d244ca2511df9b66bf098c591b2';
+
+    function getWeatherInfo(lat, lon, marker) {
+        return fetch(`${weatherApiUrl}lat=${lat}&lon=${lon}&appid=${weatherAPIkey}`)
+            .then(response => response.json())
+            .then(({main: {temp}}) => {
+                marker.addListener('click', () => {
+                    initInfoWindow(temp).open(map, marker);
+                });
+            })
+            .catch(err => console.log(err));
+    }
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: examplePosition,
+            zoom: 7
+        });
+
+        const marker = initMarkerCurrLoc();
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                let pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                getWeatherInfo(pos.lat, pos.lng, marker);
+                marker.setPosition(pos);
+            }, () => {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+        } else {
+            handleLocationError(false, infoWindow, map.getCenter());
+        }
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow) {
+        infoWindow.setContent(browserHasGeolocation ?
+            'Error: The Geolocation service failed.' :
+            'Error: Your browser doesn\'t support geolocation.');
+
+        infoWindow.open(map);
+    }
+
+    function initInfoWindow(temp) {
+        function farToCelius(value) {
+            return Math.round(value - 273);
+        }
+
+        return new google.maps.InfoWindow({
+            content: farToCelius(temp).toString() + ' C',
+        });
+    }
+
+    function initMarkerCurrLoc() {
+        return new google.maps.Marker({
+            map: map,
+        });
+    }
+
+</script>
+
+</body>
+</html>
